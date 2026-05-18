@@ -342,10 +342,18 @@ export const formToGql = ((form: OtherFormState) => {
         key: bucketConfig.credentialsKey || undefined,
         secret: bucketConfig.credentialsSecret || undefined,
       },
-      retryFailedLogMoveLookbackMonths:
-        bucketConfig.retryFailedLogMoveLookbackMonths || undefined,
-      retryFailedLogMoveMaxJobsPerRun:
-        bucketConfig.retryFailedLogMoveMaxJobsPerRun || undefined,
+      ...(bucketConfig.retryFailedLogMoveLookbackMonths
+        ? {
+            retryFailedLogMoveLookbackMonths:
+              bucketConfig.retryFailedLogMoveLookbackMonths,
+          }
+        : {}),
+      ...(bucketConfig.retryFailedLogMoveMaxJobsPerRun
+        ? {
+            retryFailedLogMoveMaxJobsPerRun:
+              bucketConfig.retryFailedLogMoveMaxJobsPerRun,
+          }
+        : {}),
     },
 
     ssh: {
